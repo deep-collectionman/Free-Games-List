@@ -6,17 +6,36 @@ import 'package:http/http.dart' as http;
 import 'package:free_games/models/free_game.dart';
 
 enum SortRule {
-  alphabetical,
+  alphabeticalOrder,
   releaseDate
 }
 
 abstract class Service {
+  Future<List<FreeGame>> get mostRecentGames;
+
+  Future<List<FreeGame>> getGames();
   Future<List<FreeGame>> getGamesByCategory(String category);
   Future<List<FreeGame>> getGamesForPlatform(String platform);
   Future<List<FreeGame>> getGamesSortedByRule(SortRule sortRule);
 }
 
 class FreeGamesService implements Service {
+  @override
+  Future<List<FreeGame>> get mostRecentGames async {
+    final sortedGames = await getGamesSortedByRule(SortRule.releaseDate);
+    List<FreeGame> mostRecentGames = [];
+    for (var index = 0; index <= 2; index++) {
+      mostRecentGames.add(sortedGames[index]);
+    }
+
+    return mostRecentGames;
+  }
+
+  @override
+  Future<List<FreeGame>> getGames() async {
+    return _getGames(null);
+  }
+
   @override
   Future<List<FreeGame>> getGamesByCategory(String category) async {
     return _getGames({'category' : category});
@@ -30,7 +49,7 @@ class FreeGamesService implements Service {
   @override
   Future<List<FreeGame>> getGamesSortedByRule(SortRule sortRule) async {
     switch (sortRule) {
-      case SortRule.alphabetical:
+      case SortRule.alphabeticalOrder:
         return _getGames({'sort-by': 'alphabetical'});
       case SortRule.releaseDate:
         return _getGames({'sort-by': 'release-date'});
@@ -53,7 +72,7 @@ class FreeGamesService implements Service {
       case 404:
         throw const HttpException('Object not found: Game or endpoint not found');
       case 500:
-        throw const HttpException('Something wrong on our end (unexpected server errors) ');
+        throw const HttpException('Something went wrong on our end (unexpected server errors) ');
       default:
         throw 'Unexpected Error';
     }

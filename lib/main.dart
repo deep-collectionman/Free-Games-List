@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:free_games/services/service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:free_games/models/bloc/free_games_bloc.dart';
+import 'package:free_games/screens/home_screen.dart';
 
 void main() async {
   runApp(const App());
-  final service = FreeGamesService();
-  final mobaGames = await service.getGamesByCategory('MOBA');
-  final pcGames = await service.getGamesForPlatform('pc');
-  final gamesSortedByAlpha = await service.getGamesSortedByRule(SortRule.alphabetical);
-  final gamesSortedByReleaseDate = await service.getGamesSortedByRule(SortRule.releaseDate);
-  print(mobaGames.length);
-  print(pcGames.length);
-  print(gamesSortedByAlpha.length);
-  print(gamesSortedByReleaseDate.length);
 }
 
 class App extends StatelessWidget {
@@ -20,12 +14,19 @@ class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => FreeGamesBloc()..add(const FreeGamesFetchMostRecentEvent()),),
+        // BlocProvider(create: (context) => FreeGamesBloc()..add(const FreeGamesFetchAllEvent()),),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Free Games',
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xFF2A2E33),
+        ),
+        home: const HomeScreen(),
       ),
-      home: Container(),
     );
   }
 }

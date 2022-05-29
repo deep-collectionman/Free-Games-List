@@ -15,6 +15,8 @@ class FreeGame {
   final String developer;
   final String releaseDate;
 
+  bool get isPcGame => platform == 'PC (Windows)';
+
   FreeGame({
     required this.id,
     required this.title,
