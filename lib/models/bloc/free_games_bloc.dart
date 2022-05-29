@@ -20,7 +20,7 @@ class MostRecentBloc extends Bloc<FreeGamesEvent, FreeGamesState> {
 }
 
 class FreeGamesBloc extends Bloc<FreeGamesEvent, FreeGamesState> {
-  final _maxNumberOfGames = 15;
+  final _maxNumberOfGames = 10;
 
   bool _isFirstLoad = true;
   int _lastItemIndex = 0;
