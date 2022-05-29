@@ -43,12 +43,24 @@ class _GenresSectionState extends State<GenresSection> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 24.0,),
-      color: const Color(0xFF1A1C1F),
+      decoration: const BoxDecoration(
+        color: Color(0xFF1A1C1F),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xFF25282D),
+            blurRadius: 5.0,
+            offset: Offset(0, 4),
+          )
+        ],
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SectionHeaderView(title: 'Filter By Genre'),
+          const SectionHeaderView(
+            title: 'Filter By Genre',
+            color: Color(0xFFAAAAAA),
+          ),
           const SizedBox(height: 12.0,),
           Padding(
             padding: const EdgeInsets.all(8.0),

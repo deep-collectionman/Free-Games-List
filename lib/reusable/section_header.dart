@@ -3,10 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SectionHeaderView extends StatelessWidget {
   final String title;
+  final Color color;
 
   const SectionHeaderView({
     super.key,
     required this.title,
+    required this.color,
   });
 
   @override
@@ -19,7 +21,7 @@ class SectionHeaderView extends StatelessWidget {
           Text(
             title,
             style: GoogleFonts.robotoSlab().copyWith(
-              color: const Color(0xFFAAAAAA),
+              color: color,
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
               letterSpacing: 1.5,

@@ -37,7 +37,7 @@ class MostRecentSection extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 20.0,),
           child: Center(
             child: CircularProgressIndicator(
-              color: Colors.white,
+              color: Color(0xFF333333),
             ),
           ),
         );

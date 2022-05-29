@@ -38,11 +38,19 @@ class HomeScreen extends StatelessWidget {
         body: Center(
           child: SizedBox(
             height: double.infinity,
-            child: ListView(
-              children: const [
-                GenresSection(),
-                MostRecentSection(),
-                GameListSection(),
+            child: Stack(
+              children: [
+                ListView(
+                  children: const [
+                    SizedBox(height: 300,),
+                    MostRecentSection(),
+                    GameListSection(),
+                  ],
+                ),
+                const SizedBox(
+                  height: 300,
+                  child: GenresSection(),
+                ),
               ],
             ),
           ),

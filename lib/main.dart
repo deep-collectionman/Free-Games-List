@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Free Games',
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFF2A2E33),
+        scaffoldBackgroundColor: Colors.white // const Color(0xFF2A2E33),
       ),
       home: const HomeScreen(),
     );

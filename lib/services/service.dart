@@ -27,7 +27,7 @@ class FreeGamesService implements Service {
   Future<List<FreeGame>> get mostRecentGames async {
     final sortedGames = await getGamesSortedByRule(SortRule.releaseDate);
     List<FreeGame> mostRecentGames = [];
-    for (var index = 0; index <= 2; index++) {
+    for (var index = 0; index <= 4; index++) {
       mostRecentGames.add(sortedGames[index]);
     }
 

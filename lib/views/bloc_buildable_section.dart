@@ -21,6 +21,7 @@ class BlocBuildableSection extends StatelessWidget {
         children: [
           SectionHeaderView(
             title: title,
+            color: const Color(0xFF333333),
           ),
           blocBuilder,
         ],

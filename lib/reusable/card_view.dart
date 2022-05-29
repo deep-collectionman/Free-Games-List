@@ -19,19 +19,17 @@ class CardView extends StatelessWidget {
       width: 300,
       child: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4.0),
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4),
+              topRight: Radius.circular(4),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(4.0),
-              child: FadeInImage.assetNetwork(
-                placeholder: 'assets/images/placeholder.jpg',
-                image: thumbnailUrl,
-                width: 300.0,
-                height: 175.0,
-                fit: BoxFit.cover,
-              ),
+            child: FadeInImage.assetNetwork(
+              placeholder: 'assets/images/placeholder.jpg',
+              image: thumbnailUrl,
+              width: 300.0,
+              height: 175.0,
+              fit: BoxFit.cover,
             ),
           ),
           Container(
