@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:free_games/models/free_game.dart';
+import 'package:free_games/models/genres.dart';
 
 enum SortRule {
   alphabeticalOrder,
@@ -14,12 +15,14 @@ abstract class Service {
   Future<List<FreeGame>> get mostRecentGames;
 
   Future<List<FreeGame>> getGames();
-  Future<List<FreeGame>> getGamesByCategory(String category);
+  Future<List<FreeGame>> getGamesByGenre(Genre genre);
   Future<List<FreeGame>> getGamesForPlatform(String platform);
   Future<List<FreeGame>> getGamesSortedByRule(SortRule sortRule);
 }
 
 class FreeGamesService implements Service {
+  const FreeGamesService();
+
   @override
   Future<List<FreeGame>> get mostRecentGames async {
     final sortedGames = await getGamesSortedByRule(SortRule.releaseDate);
@@ -37,8 +40,8 @@ class FreeGamesService implements Service {
   }
 
   @override
-  Future<List<FreeGame>> getGamesByCategory(String category) async {
-    return _getGames({'category' : category});
+  Future<List<FreeGame>> getGamesByGenre(Genre genre) async {
+    return _getGames({'category' : genres[genre]!});
   }
 
   @override

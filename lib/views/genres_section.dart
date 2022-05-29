@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:free_games/reusable/section_header.dart';
 import 'package:free_games/models/genres.dart';
 
 class GenresSection extends StatefulWidget {
@@ -14,44 +15,51 @@ class _GenresSectionState extends State<GenresSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Wrap(
-        children: List<Widget>.generate(
-          genres.length,
-          (index) {
-            final key = genres.keys.toList()[index];
-            final genre = genres[key];
-            return Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: ChipTheme(
-                data: ChipTheme.of(context).copyWith(
-                  backgroundColor: const Color(0xFF2A2E33),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: Colors.white,
-                      width: 1.0,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SectionHeaderView(title: 'Filter By Genre'),
+        const SizedBox(height: 12.0,),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Wrap(
+            children: List<Widget>.generate(
+              genres.length,
+              (index) {
+                final key = genres.keys.toList()[index];
+                final genre = genres[key];
+                return Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: ChipTheme(
+                    data: ChipTheme.of(context).copyWith(
+                      backgroundColor: const Color(0xFF2A2E33),
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color: Colors.white,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      labelStyle: TextStyle(
+                        color: currentSelectedGenre == genre ? Colors.white : const Color(0xFFAAAAAA),
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(25.0),
+                    child: ChoiceChip(
+                      label: Text(genre?.toUpperCase() ?? ''),
+                      selected: currentSelectedGenre == genre,
+                      onSelected: (bool value) {
+                        setState(() {
+                          currentSelectedGenre = genre;
+                        });
+                      },
+                    ),
                   ),
-                  labelStyle: TextStyle(
-                    color: currentSelectedGenre == genre ? Colors.white : const Color(0xFFAAAAAA),
-                  ),
-                ),
-                child: ChoiceChip(
-                  label: Text(genre?.toUpperCase() ?? ''),
-                  selected: currentSelectedGenre == genre,
-                  onSelected: (bool value) {
-                    setState(() {
-                      currentSelectedGenre = genre;
-                    });
-                  },
-                ),
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

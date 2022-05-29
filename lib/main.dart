@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:free_games/models/bloc/free_games_bloc.dart';
+import 'package:free_games/models/genres.dart';
+
 import 'package:free_games/screens/home_screen.dart';
 
 void main() async {
@@ -16,8 +17,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => FreeGamesBloc()..add(const FreeGamesFetchMostRecentEvent()),),
-        // BlocProvider(create: (context) => FreeGamesBloc()..add(const FreeGamesFetchAllEvent()),),
+        BlocProvider(create: (context) => MostRecentBloc()..add(const FreeGamesFetchMostRecentEvent())),
+        BlocProvider(create: (context) => FreeGamesBloc()..add(const FreeGamesFetchByCategoryEvent(genre: Genre.moba))),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

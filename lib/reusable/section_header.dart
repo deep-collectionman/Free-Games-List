@@ -19,7 +19,7 @@ class SectionHeaderView extends StatelessWidget {
             title,
             style: const TextStyle(
               color: Color(0xFFAAAAAA),
-              fontSize: 22.0,
+              fontSize: 28.0,
               fontWeight: FontWeight.bold,
               letterSpacing: 1.5,
             ),

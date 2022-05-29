@@ -2,36 +2,44 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../free_game.dart';
+import '../genres.dart';
 import '../../services/service.dart';
 
 part 'free_games_event.dart';
 part 'free_games_state.dart';
 
-class FreeGamesBloc extends Bloc<FreeGamesEvent, FreeGamesState> {
-  final _service = FreeGamesService();
+class MostRecentBloc extends Bloc<FreeGamesEvent, FreeGamesState> {
+  final Service service;
 
-  FreeGamesBloc() : super(FreeGamesInitialState()) {
+  MostRecentBloc({this.service = const FreeGamesService()}) : super(FreeGamesLoadingState()) {
+    on<FreeGamesFetchMostRecentEvent>((event, emit) async {
+      final results = await service.mostRecentGames;
+      emit(FreeGamesLoadedState(freeGames: results));
+    });
+  }
+}
+
+class FreeGamesBloc extends Bloc<FreeGamesEvent, FreeGamesState> {
+  final Service service;
+
+  FreeGamesBloc({this.service = const FreeGamesService()}) : super(FreeGamesLoadingState()) {
     Future<List<FreeGame>>? future;
 
     on<FreeGamesFetchEvent>((event, emit) async {
-      if (event is FreeGamesFetchMostRecentEvent) {
-        future = _service.mostRecentGames;
-      }
-
       if (event is FreeGamesFetchAllEvent) {
-        future = _service.getGames();
+        future = service.getGames();
       }
 
       if (event is FreeGamesFetchByCategoryEvent) {
-        future = _service.getGamesByCategory(event.category);
+        future = service.getGamesByGenre(event.genre);
       }
 
       if (event is FreeGamesFetchForPlatformEvent) {
-        future = _service.getGamesForPlatform(event.platform);
+        future = service.getGamesForPlatform(event.platform);
       }
 
       if (event is FreeGamesFetchUsingSortRuleEvent) {
-        future = _service.getGamesSortedByRule(event.sortRule);
+        future = service.getGamesSortedByRule(event.sortRule);
       }
 
       final results = await future ?? [];

@@ -7,7 +7,7 @@ abstract class FreeGamesState extends Equatable {
   List<Object> get props => [];
 }
 
-class FreeGamesInitialState extends FreeGamesState {}
+class FreeGamesLoadingState extends FreeGamesState {}
 
 class FreeGamesLoadedState extends FreeGamesState {
   final List<FreeGame> freeGames;

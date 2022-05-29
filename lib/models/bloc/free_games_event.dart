@@ -20,12 +20,12 @@ class FreeGamesFetchMostRecentEvent extends FreeGamesFetchEvent {
 }
 
 class FreeGamesFetchByCategoryEvent extends FreeGamesFetchEvent {
-  final String category;
+  final Genre genre;
 
-  const FreeGamesFetchByCategoryEvent({required this.category});
+  const FreeGamesFetchByCategoryEvent({required this.genre});
 
   @override
-  List<Object> get props => [category];
+  List<Object> get props => [genre];
 }
 
 class FreeGamesFetchForPlatformEvent extends FreeGamesFetchEvent {
