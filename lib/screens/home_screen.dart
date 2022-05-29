@@ -20,9 +20,7 @@ class HomeScreen extends StatelessWidget {
           height: double.infinity,
           child: ListView(
             children: const [
-              SizedBox(height: 24.0,),
               GenresSection(),
-              SizedBox(height: 24.0,),
               MostRecentSection(),
               GameListSection(),
             ],

@@ -15,13 +15,16 @@ class BlocBuildableSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SectionHeaderView(
-          title: title,
-        ),
-        blocBuilder,
-      ],
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12.0,),
+      child: Column(
+        children: [
+          SectionHeaderView(
+            title: title,
+          ),
+          blocBuilder,
+        ],
+      ),
     );
   }
 }
