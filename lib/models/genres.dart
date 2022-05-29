@@ -19,5 +19,5 @@ final Map<Genre, String> genres = {
   Genre.fighting : 'fighting',
   Genre.social : 'social',
   Genre.sports : 'sports',
-  Genre.cardGame : 'Card Game',
+  Genre.cardGame : 'card',
 };

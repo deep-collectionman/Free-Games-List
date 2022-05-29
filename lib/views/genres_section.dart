@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:free_games/models/bloc/free_games_bloc.dart';
 
 import 'package:free_games/reusable/section_header.dart';
@@ -14,6 +15,29 @@ class GenresSection extends StatefulWidget {
 
 class _GenresSectionState extends State<GenresSection> {
   String? _currentSelectedGenre;
+
+  IconData _iconForGenre(Genre genre) {
+    switch (genre) {
+      case Genre.shooter:
+        return FontAwesomeIcons.bullseye;
+      case Genre.mmorpg:
+        return FontAwesomeIcons.fantasyFlightGames;
+      case Genre.mmo:
+        return FontAwesomeIcons.dragon;
+      case Genre.strategy:
+        return FontAwesomeIcons.chess;
+      case Genre.moba:
+        return FontAwesomeIcons.mobile;
+      case Genre.fighting:
+        return FontAwesomeIcons.handFist;
+      case Genre.social:
+        return FontAwesomeIcons.solidComment;
+      case Genre.sports:
+        return FontAwesomeIcons.basketball;
+      case Genre.cardGame:
+        return FontAwesomeIcons.solidHeart;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,16 +71,30 @@ class _GenresSectionState extends State<GenresSection> {
                           borderRadius: BorderRadius.circular(25.0),
                         ),
                         labelStyle: TextStyle(
-                          color: _currentSelectedGenre == genre ? Colors.white : const Color(0xFFAAAAAA),
+                          color: _currentSelectedGenre == genre ? Colors.black : const Color(0xFFAAAAAA),
                         ),
                       ),
                       child: ChoiceChip(
-                        label: Text(genre?.toUpperCase() ?? ''),
+                        label: SizedBox(
+                          width: 90,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(genre?.toUpperCase() ?? ''),
+                              Icon(
+                                _iconForGenre(key),
+                                color: _currentSelectedGenre == genre ? Colors.black : const Color(0xFFAAAAAA),
+                                size: 14,
+                              )
+                            ],
+                          ),
+                        ),
                         selected: _currentSelectedGenre == genre,
                         onSelected: (bool value) {
                           setState(() {
                             _currentSelectedGenre = genre;
                             // context.watch<FreeGamesBloc>().add(FreeGamesFetchByCategoryEvent(genre: key));
+                            context.read<FreeGamesBloc>().add(fetchByGenre(key));
                           });
                         },
                       ),
