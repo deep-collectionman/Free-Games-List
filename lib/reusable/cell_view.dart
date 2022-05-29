@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:free_games/reusable/free_label.dart';
 
@@ -62,8 +63,8 @@ class CellView extends StatelessWidget {
                     overflow: TextOverflow.fade,
                     maxLines: 1,
                     softWrap: false,
-                    style: const TextStyle(
-                      color: Color(0xFFAAAAAA),
+                    style: GoogleFonts.robotoSlab().copyWith(
+                      color: const Color(0xFFAAAAAA),
                       fontSize: 18.0,
                     ),
                   ),
@@ -92,7 +93,7 @@ class CellView extends StatelessWidget {
                   child: Center(
                     child: Text(
                       subDetail,
-                      style: const TextStyle(
+                      style: GoogleFonts.robotoSlab().copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),

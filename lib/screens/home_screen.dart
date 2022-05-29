@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:free_games/views/game_list_section.dart';
 import 'package:free_games/views/genres_section.dart';
 import 'package:free_games/views/most_recent_section.dart';
 import 'package:free_games/models/bloc/free_games_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,7 +20,18 @@ class HomeScreen extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Free Games'),
+          title: Row(
+            children: [
+              const Icon(FontAwesomeIcons.gamepad),
+              const SizedBox(width: 12.0,),
+              Text(
+                'Free Games',
+                style: GoogleFonts.robotoSlab().copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
           centerTitle: true,
           backgroundColor: const Color(0xFF020202),
         ),
