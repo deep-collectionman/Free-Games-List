@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Free Games'),
         centerTitle: true,
-        backgroundColor: const Color(0xFF272B30),
+        backgroundColor: const Color(0xFF020202),
       ),
       body: Center(
         child: SizedBox(
