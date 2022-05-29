@@ -55,14 +55,17 @@ class CellView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  overflow: TextOverflow.fade,
-                  maxLines: 1,
-                  softWrap: false,
-                  style: const TextStyle(
-                    color: Color(0xFFAAAAAA),
-                    fontSize: 18.0,
+                SizedBox(
+                  width: 210,
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.fade,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: const TextStyle(
+                      color: Color(0xFFAAAAAA),
+                      fontSize: 18.0,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 8.0,),
