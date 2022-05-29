@@ -17,8 +17,8 @@ class BlocBuildableSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SectionHeaderView(
-          title: 'Most Recent Games',
+        SectionHeaderView(
+          title: title,
         ),
         blocBuilder,
       ],
