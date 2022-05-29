@@ -8,42 +8,28 @@ import '../../services/service.dart';
 part 'free_games_event.dart';
 part 'free_games_state.dart';
 
-class MostRecentBloc extends Bloc<FreeGamesEvent, FreeGamesState> {
-  final Service service;
+const _service = FreeGamesService();
 
-  MostRecentBloc({this.service = const FreeGamesService()}) : super(FreeGamesLoadingState()) {
-    on<FreeGamesFetchMostRecentEvent>((event, emit) async {
-      final results = await service.mostRecentGames;
+class MostRecentBloc extends Bloc<FreeGamesEvent, FreeGamesState> {
+  MostRecentBloc() : super(FreeGamesLoadingState()) {
+    on<FreeGamesFetchEvent>((event, emit) async {
+      final results = await event.future;
       emit(FreeGamesLoadedState(freeGames: results));
     });
   }
 }
 
 class FreeGamesBloc extends Bloc<FreeGamesEvent, FreeGamesState> {
-  final Service service;
-
-  FreeGamesBloc({this.service = const FreeGamesService()}) : super(FreeGamesLoadingState()) {
-    Future<List<FreeGame>>? future;
-
+  FreeGamesBloc() : super(FreeGamesLoadingState()) {
     on<FreeGamesFetchEvent>((event, emit) async {
-      if (event is FreeGamesFetchAllEvent) {
-        future = service.getGames();
-      }
-
-      if (event is FreeGamesFetchByCategoryEvent) {
-        future = service.getGamesByGenre(event.genre);
-      }
-
-      if (event is FreeGamesFetchForPlatformEvent) {
-        future = service.getGamesForPlatform(event.platform);
-      }
-
-      if (event is FreeGamesFetchUsingSortRuleEvent) {
-        future = service.getGamesSortedByRule(event.sortRule);
-      }
-
-      final results = await future ?? [];
+      final results = await event.future;
       emit(FreeGamesLoadedState(freeGames: results));
     });
   }
 }
+
+final fetchMostRecentEvent = FreeGamesFetchEvent(future: _service.mostRecentGames);
+final fetchAllEvent = FreeGamesFetchEvent(future: _service.getGames());
+FreeGamesFetchEvent fetchByGenre (Genre genre) => FreeGamesFetchEvent(future: _service.getGamesByGenre(genre));
+FreeGamesFetchEvent fetchUsingSortRule (SortRule sortRule) => FreeGamesFetchEvent(future: _service.getGamesSortedByRule(sortRule));
+FreeGamesFetchEvent fetchForPlatform (String platform) => FreeGamesFetchEvent(future: _service.getGamesForPlatform(platform));

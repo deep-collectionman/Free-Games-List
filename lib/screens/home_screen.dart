@@ -5,7 +5,6 @@ import 'package:free_games/views/game_list_section.dart';
 import 'package:free_games/views/genres_section.dart';
 import 'package:free_games/views/most_recent_section.dart';
 import 'package:free_games/models/bloc/free_games_bloc.dart';
-import 'package:free_games/models/genres.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,8 +13,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => MostRecentBloc()..add(const FreeGamesFetchMostRecentEvent())),
-        BlocProvider(create: (context) => FreeGamesBloc()..add(const FreeGamesFetchByCategoryEvent(genre: Genre.moba))),
+        BlocProvider(create: (context) => MostRecentBloc()..add(fetchMostRecentEvent)),
+        BlocProvider(create: (context) => FreeGamesBloc()..add(fetchAllEvent)),
       ],
       child: Scaffold(
         appBar: AppBar(

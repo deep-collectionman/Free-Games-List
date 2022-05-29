@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:free_games/models/bloc/free_games_bloc.dart';
 
 import 'package:free_games/reusable/section_header.dart';
 import 'package:free_games/models/genres.dart';
@@ -11,7 +13,7 @@ class GenresSection extends StatefulWidget {
 }
 
 class _GenresSectionState extends State<GenresSection> {
-  String? currentSelectedGenre;
+  String? _currentSelectedGenre;
 
   @override
   Widget build(BuildContext context) {
@@ -45,15 +47,16 @@ class _GenresSectionState extends State<GenresSection> {
                           borderRadius: BorderRadius.circular(25.0),
                         ),
                         labelStyle: TextStyle(
-                          color: currentSelectedGenre == genre ? Colors.white : const Color(0xFFAAAAAA),
+                          color: _currentSelectedGenre == genre ? Colors.white : const Color(0xFFAAAAAA),
                         ),
                       ),
                       child: ChoiceChip(
                         label: Text(genre?.toUpperCase() ?? ''),
-                        selected: currentSelectedGenre == genre,
+                        selected: _currentSelectedGenre == genre,
                         onSelected: (bool value) {
                           setState(() {
-                            currentSelectedGenre = genre;
+                            _currentSelectedGenre = genre;
+                            // context.watch<FreeGamesBloc>().add(FreeGamesFetchByCategoryEvent(genre: key));
                           });
                         },
                       ),

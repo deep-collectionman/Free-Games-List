@@ -8,40 +8,10 @@ abstract class FreeGamesEvent extends Equatable {
 }
 
 class FreeGamesFetchEvent extends FreeGamesEvent {
-  const FreeGamesFetchEvent();
-}
+  final Future<List<FreeGame>> future;
 
-class FreeGamesFetchAllEvent extends FreeGamesFetchEvent {
-  const FreeGamesFetchAllEvent();
-}
-
-class FreeGamesFetchMostRecentEvent extends FreeGamesFetchEvent {
-  const FreeGamesFetchMostRecentEvent();
-}
-
-class FreeGamesFetchByCategoryEvent extends FreeGamesFetchEvent {
-  final Genre genre;
-
-  const FreeGamesFetchByCategoryEvent({required this.genre});
+  const FreeGamesFetchEvent({required this.future});
 
   @override
-  List<Object> get props => [genre];
-}
-
-class FreeGamesFetchForPlatformEvent extends FreeGamesFetchEvent {
-  final String platform;
-
-  const FreeGamesFetchForPlatformEvent({required this.platform});
-
-  @override
-  List<Object> get props => [platform];
-}
-
-class FreeGamesFetchUsingSortRuleEvent extends FreeGamesFetchEvent {
-  final SortRule sortRule;
-
-  const FreeGamesFetchUsingSortRuleEvent({required this.sortRule});
-
-  @override
-  List<Object> get props => [sortRule];
+  List<Object> get props => [future];
 }
