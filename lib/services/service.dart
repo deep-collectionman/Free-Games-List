@@ -12,8 +12,7 @@ enum SortRule {
 }
 
 abstract class Service {
-  Future<List<FreeGame>> get mostRecentGames;
-
+  Future<List<FreeGame>> mostRecentGames(Genre genre);
   Future<List<FreeGame>> getGames();
   Future<List<FreeGame>> getGamesByGenre(Genre genre);
   Future<List<FreeGame>> getGamesForPlatform(String platform);
@@ -24,8 +23,11 @@ class FreeGamesService implements Service {
   const FreeGamesService();
 
   @override
-  Future<List<FreeGame>> get mostRecentGames async {
-    final sortedGames = await getGamesSortedByRule(SortRule.releaseDate);
+  Future<List<FreeGame>> mostRecentGames(Genre genre) async {
+    final sortedGames = await _getGames({
+      if (genre != Genre.all) 'category' : genres[genre]!,
+      'sort-by': 'release-date',
+    });
     List<FreeGame> mostRecentGames = [];
     for (var index = 0; index <= 4; index++) {
       mostRecentGames.add(sortedGames[index]);
@@ -41,7 +43,7 @@ class FreeGamesService implements Service {
 
   @override
   Future<List<FreeGame>> getGamesByGenre(Genre genre) async {
-    return _getGames({'category' : genres[genre]!});
+    return _getGames({if (genre != Genre.all) 'category' : genres[genre]!});
   }
 
   @override

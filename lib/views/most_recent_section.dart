@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:free_games/models/bloc/free_games_bloc.dart';
-import 'package:free_games/reusable/card_view.dart';
+import 'package:free_games/reusable/card_view_builder.dart';
 import 'bloc_buildable_section.dart';
 
 class MostRecentSection extends StatelessWidget {
@@ -23,10 +23,7 @@ class MostRecentSection extends StatelessWidget {
                 final game = state.freeGames[index];
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CardView(
-                    title: game.title,
-                    thumbnailUrl: game.thumbnail,
-                  ),
+                  child: CardViewBuilder.build(game),
                 );
               },
             ),

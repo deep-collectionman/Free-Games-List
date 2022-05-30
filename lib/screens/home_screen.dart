@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => MostRecentBloc()..add(fetchMostRecentEvent)),
+        BlocProvider(create: (context) => MostRecentBloc()..add(fetchMostRecent())),
         BlocProvider(create: (context) => FreeGamesBloc()..add(fetchAllEvent)),
       ],
       child: Scaffold(
@@ -42,13 +42,13 @@ class HomeScreen extends StatelessWidget {
               children: [
                 ListView(
                   children: const [
-                    SizedBox(height: 300,),
+                    SizedBox(height: 320,),
                     MostRecentSection(),
                     GameListSection(),
                   ],
                 ),
                 const SizedBox(
-                  height: 300,
+                  height: 320,
                   child: GenresSection(),
                 ),
               ],

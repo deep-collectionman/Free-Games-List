@@ -16,7 +16,7 @@ class BlocBuildableSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12.0,),
+      padding: const EdgeInsets.symmetric(vertical: 4.0,),
       child: Column(
         children: [
           SectionHeaderView(

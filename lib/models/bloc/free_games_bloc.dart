@@ -48,8 +48,8 @@ class FreeGamesBloc extends Bloc<FreeGamesEvent, FreeGamesState> {
   }
 }
 
-final fetchMostRecentEvent = FreeGamesFetchEvent(future: _service.mostRecentGames);
 final fetchAllEvent = FreeGamesFetchEvent(future: _service.getGames());
+FreeGamesFetchEvent fetchMostRecent ({Genre genre = Genre.all}) => FreeGamesFetchEvent(future: _service.mostRecentGames(genre));
 FreeGamesFetchEvent fetchByGenre (Genre genre) => FreeGamesFetchEvent(future: _service.getGamesByGenre(genre));
 FreeGamesFetchEvent fetchUsingSortRule (SortRule sortRule) => FreeGamesFetchEvent(future: _service.getGamesSortedByRule(sortRule));
 FreeGamesFetchEvent fetchForPlatform (String platform) => FreeGamesFetchEvent(future: _service.getGamesForPlatform(platform));

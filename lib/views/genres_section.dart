@@ -5,6 +5,7 @@ import 'package:free_games/models/bloc/free_games_bloc.dart';
 
 import 'package:free_games/reusable/section_header.dart';
 import 'package:free_games/models/genres.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GenresSection extends StatefulWidget {
   const GenresSection({Key? key}) : super(key: key);
@@ -36,13 +37,15 @@ class _GenresSectionState extends State<GenresSection> {
         return FontAwesomeIcons.basketball;
       case Genre.cardGame:
         return FontAwesomeIcons.solidHeart;
+      case Genre.all:
+        return FontAwesomeIcons.gamepad;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24.0,),
+      padding: const EdgeInsets.symmetric(vertical: 12.0,),
       decoration: const BoxDecoration(
         color: Color(0xFF1A1C1F),
         boxShadow: [
@@ -76,8 +79,8 @@ class _GenresSectionState extends State<GenresSection> {
                       data: ChipTheme.of(context).copyWith(
                         backgroundColor: const Color(0xFF2A2E33),
                         shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Colors.white,
+                          side: BorderSide(
+                            color: _currentSelectedGenre == genre ? Colors.black : Colors.white,
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(25.0),
@@ -92,7 +95,12 @@ class _GenresSectionState extends State<GenresSection> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(genre?.toUpperCase() ?? ''),
+                              Text(
+                                genre?.toUpperCase() ?? '',
+                                style: GoogleFonts.roboto().copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                               Icon(
                                 _iconForGenre(key),
                                 color: _currentSelectedGenre == genre ? Colors.black : const Color(0xFFAAAAAA),
@@ -105,8 +113,8 @@ class _GenresSectionState extends State<GenresSection> {
                         onSelected: (bool value) {
                           setState(() {
                             _currentSelectedGenre = genre;
-                            // context.watch<FreeGamesBloc>().add(FreeGamesFetchByCategoryEvent(genre: key));
                             context.read<FreeGamesBloc>().add(fetchByGenre(key));
+                            context.read<MostRecentBloc>().add(fetchMostRecent(genre: key));
                           });
                         },
                       ),
