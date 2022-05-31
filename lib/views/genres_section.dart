@@ -85,9 +85,7 @@ class _GenresSectionState extends State<GenresSection> {
                       backgroundColor: const Color(0xFF2A2E33),
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
-                          color: _currentSelectedGenre == genre
-                              ? Colors.black
-                              : Colors.white,
+                          color: _currentSelectedGenre != genre ? Colors.white : Colors.transparent,
                           width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular(25.0),
@@ -100,7 +98,7 @@ class _GenresSectionState extends State<GenresSection> {
                     ),
                     child: ChoiceChip(
                       label: SizedBox(
-                        width: 90,
+                        width: 85,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
