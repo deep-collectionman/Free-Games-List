@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import 'package:free_games/styles/default_text_style.dart';
 
 class SectionHeaderView extends StatelessWidget {
   final String title;
@@ -20,11 +21,11 @@ class SectionHeaderView extends StatelessWidget {
         children: [
           Text(
             title,
-            style: GoogleFonts.robotoSlab().copyWith(
+            style: defaultTextStyle(
               color: color,
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
-              letterSpacing: 1.5,
+              letterSpacing: 2.5,
             ),
           ),
         ],

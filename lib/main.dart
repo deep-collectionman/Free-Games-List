@@ -14,7 +14,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Free Games',
+      title: 'Free Games Today',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white // const Color(0xFF2A2E33),
       ),

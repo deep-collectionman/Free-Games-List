@@ -25,8 +25,8 @@ class HomeScreen extends StatelessWidget {
               const Icon(FontAwesomeIcons.gamepad),
               const SizedBox(width: 12.0,),
               Text(
-                'Free Games',
-                style: GoogleFonts.robotoSlab().copyWith(
+                'Free Games Today',
+                style: GoogleFonts.bebasNeue().copyWith(
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -42,15 +42,12 @@ class HomeScreen extends StatelessWidget {
               children: [
                 ListView(
                   children: const [
-                    SizedBox(height: 320,),
+                    SizedBox(height: 160,),
                     MostRecentSection(),
                     GameListSection(),
                   ],
                 ),
-                const SizedBox(
-                  height: 320,
-                  child: GenresSection(),
-                ),
+                const GenresSection(),
               ],
             ),
           ),

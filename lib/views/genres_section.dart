@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:free_games/models/bloc/free_games_bloc.dart';
 
-import 'package:free_games/reusable/section_header.dart';
+import 'package:free_games/models/bloc/free_games_bloc.dart';
 import 'package:free_games/models/genres.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:free_games/reusable/section_header.dart';
+import 'package:free_games/styles/default_text_style.dart';
 
 class GenresSection extends StatefulWidget {
   const GenresSection({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class GenresSection extends StatefulWidget {
 }
 
 class _GenresSectionState extends State<GenresSection> {
-  String? _currentSelectedGenre;
+  Genre _currentSelectedGenre = Genre.all;
 
   IconData _iconForGenre(Genre genre) {
     switch (genre) {
@@ -45,14 +45,17 @@ class _GenresSectionState extends State<GenresSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12.0,),
+      height: 150,
+      padding: const EdgeInsets.symmetric(
+        vertical: 12.0,
+      ),
       decoration: const BoxDecoration(
         color: Color(0xFF1A1C1F),
         boxShadow: [
           BoxShadow(
             color: Color(0xFF25282D),
             blurRadius: 5.0,
-            offset: Offset(0, 4),
+            offset: Offset(0, 2),
           )
         ],
       ),
@@ -64,64 +67,70 @@ class _GenresSectionState extends State<GenresSection> {
             title: 'Filter By Genre',
             color: Color(0xFFAAAAAA),
           ),
-          const SizedBox(height: 12.0,),
-          Padding(
+          const SizedBox(
+            height: 12.0,
+          ),
+          Container(
+            height: 60,
             padding: const EdgeInsets.all(8.0),
-            child: Wrap(
-              children: List<Widget>.generate(
-                genres.length,
-                (index) {
-                  final key = genres.keys.toList()[index];
-                  final genre = genres[key];
-                  return Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: ChipTheme(
-                      data: ChipTheme.of(context).copyWith(
-                        backgroundColor: const Color(0xFF2A2E33),
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            color: _currentSelectedGenre == genre ? Colors.black : Colors.white,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(25.0),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: genres.keys.length,
+              itemBuilder: (context, index) {
+                final genre = genres.keys.toList()[index];
+                return Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: ChipTheme(
+                    data: ChipTheme.of(context).copyWith(
+                      backgroundColor: const Color(0xFF2A2E33),
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: _currentSelectedGenre == genre
+                              ? Colors.black
+                              : Colors.white,
+                          width: 1.0,
                         ),
-                        labelStyle: TextStyle(
-                          color: _currentSelectedGenre == genre ? Colors.black : const Color(0xFFAAAAAA),
-                        ),
+                        borderRadius: BorderRadius.circular(25.0),
                       ),
-                      child: ChoiceChip(
-                        label: SizedBox(
-                          width: 90,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                genre?.toUpperCase() ?? '',
-                                style: GoogleFonts.roboto().copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Icon(
-                                _iconForGenre(key),
-                                color: _currentSelectedGenre == genre ? Colors.black : const Color(0xFFAAAAAA),
-                                size: 14,
-                              )
-                            ],
-                          ),
-                        ),
-                        selected: _currentSelectedGenre == genre,
-                        onSelected: (bool value) {
-                          setState(() {
-                            _currentSelectedGenre = genre;
-                            context.read<FreeGamesBloc>().add(fetchByGenre(key));
-                            context.read<MostRecentBloc>().add(fetchMostRecent(genre: key));
-                          });
-                        },
+                      labelStyle: defaultTextStyle(
+                        color: _currentSelectedGenre == genre ? Colors.black : const Color(0xFFAAAAAA),
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 2.0,
                       ),
                     ),
-                  );
-                },
-              ),
+                    child: ChoiceChip(
+                      label: SizedBox(
+                        width: 90,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(genres[genre]?.toUpperCase() ?? '',),
+                            Icon(
+                              _iconForGenre(genre),
+                              color: _currentSelectedGenre == genre
+                                  ? Colors.black
+                                  : const Color(0xFFAAAAAA),
+                              size: 14,
+                            )
+                          ],
+                        ),
+                      ),
+                      selected: _currentSelectedGenre == genre,
+                      onSelected: (bool value) {
+                        setState(() {
+                          _currentSelectedGenre = genre;
+                          context
+                              .read<FreeGamesBloc>()
+                              .add(fetchByGenre(genre));
+                          context
+                              .read<MostRecentBloc>()
+                              .add(fetchMostRecent(genre: genre));
+                        });
+                      },
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:free_games/reusable/free_label.dart';
+import 'package:free_games/styles/default_text_style.dart';
 
 class CardView extends StatelessWidget {
   final String title;
@@ -63,7 +63,7 @@ class CardView extends StatelessWidget {
                         overflow: TextOverflow.fade,
                         maxLines: 1,
                         softWrap: false,
-                        style: GoogleFonts.robotoSlab().copyWith(
+                        style: defaultTextStyle(
                           color: const Color(0xFFAAAAAA),
                           fontSize: 18.0,
                         ),

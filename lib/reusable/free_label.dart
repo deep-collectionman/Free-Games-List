@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import 'package:free_games/styles/default_text_style.dart';
 
 class FreeLabel extends StatelessWidget {
   const FreeLabel({super.key});
@@ -16,10 +17,9 @@ class FreeLabel extends StatelessWidget {
       child: Center(
         child: Text(
           'FREE',
-          style: TextStyle(
+          style: defaultTextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
-            fontFamily: GoogleFonts.robotoSlab().fontFamily,
           ),
         ),
       ),

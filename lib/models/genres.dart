@@ -12,6 +12,7 @@ enum Genre {
 }
 
 final Map<Genre, String> genres = {
+  Genre.all : 'all',
   Genre.shooter : 'shooter',
   Genre.mmorpg : 'MMORPG',
   Genre.mmo : 'MMO',
@@ -21,5 +22,4 @@ final Map<Genre, String> genres = {
   Genre.social : 'social',
   Genre.sports : 'sports',
   Genre.cardGame : 'card',
-  Genre.all : 'all',
 };
