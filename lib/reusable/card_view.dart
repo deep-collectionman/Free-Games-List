@@ -7,12 +7,14 @@ class CardView extends StatelessWidget {
   final String title;
   final String thumbnailUrl;
   final Widget detailWidget;
+  final IconData iconData;
 
   const CardView({
     super.key,
     required this.title,
     required this.thumbnailUrl,
     required this.detailWidget,
+    required this.iconData,
   });
 
   @override
@@ -70,7 +72,16 @@ class CardView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 12.0,),
-                    const FreeLabel(),
+                    Row(
+                      children: [
+                        Icon(
+                          iconData,
+                          color: const Color(0xFF7A8288),
+                        ),
+                        const SizedBox(width: 8.0,),
+                        const FreeLabel(),
+                      ],
+                    ),
                   ],
                 ),
               ),

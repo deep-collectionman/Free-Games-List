@@ -46,8 +46,8 @@ class _GenresSectionState extends State<GenresSection> {
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-      padding: const EdgeInsets.symmetric(
-        vertical: 12.0,
+      padding: const EdgeInsets.only(
+        top: 18.0,
       ),
       decoration: const BoxDecoration(
         color: Color(0xFF1A1C1F),
@@ -88,7 +88,7 @@ class _GenresSectionState extends State<GenresSection> {
                           color: _currentSelectedGenre != genre ? Colors.white : Colors.transparent,
                           width: 1.0,
                         ),
-                        borderRadius: BorderRadius.circular(25.0),
+                        borderRadius: BorderRadius.circular(50.0),
                       ),
                       labelStyle: defaultTextStyle(
                         color: _currentSelectedGenre == genre ? Colors.black : const Color(0xFFAAAAAA),
@@ -102,14 +102,14 @@ class _GenresSectionState extends State<GenresSection> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(genres[genre]?.toUpperCase() ?? '',),
                             Icon(
                               _iconForGenre(genre),
                               color: _currentSelectedGenre == genre
                                   ? Colors.black
                                   : const Color(0xFFAAAAAA),
-                              size: 14,
-                            )
+                              size: 18,
+                            ),
+                            Text(genres[genre]?.toUpperCase() ?? '',),
                           ],
                         ),
                       ),

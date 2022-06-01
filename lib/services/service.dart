@@ -20,7 +20,11 @@ abstract class Service {
 }
 
 class FreeGamesService implements Service {
-  const FreeGamesService();
+  final _maxNumberPerPage = 10;
+  int _indexOfLastItem = 0;
+  Uri? _lastRequest;
+
+  FreeGamesService();
 
   @override
   Future<List<FreeGame>> mostRecentGames(Genre genre) async {
@@ -70,10 +74,24 @@ class FreeGamesService implements Service {
         queryParameters: queries,
       ),
     );
+
+    final currentRequest = response.request?.url;
     switch (response.statusCode) {
       case 200:
         final json = jsonDecode(response.body);
-        return List.from(json).map((element) => FreeGame.fromJson(element)).toList();
+        var result = List.from(json).map((element) => FreeGame.fromJson(element)).toList();
+        final numberOfPages = (result.length / _maxNumberPerPage).truncate();
+
+        final isSameRequest = currentRequest == _lastRequest;
+
+        if (numberOfPages > 1 && isSameRequest) {
+          result = result.sublist(_indexOfLastItem, _maxNumberPerPage + _indexOfLastItem);
+        } else {
+          _indexOfLastItem = 0;
+          _lastRequest = currentRequest;
+        }
+
+        return result;
       case 404:
         throw const HttpException('Object not found: Game or endpoint not found');
       case 500:
