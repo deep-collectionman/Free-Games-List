@@ -12,8 +12,8 @@ enum SortRule {
 }
 
 abstract class Service {
-  Future<List<FreeGame>> mostRecentGames(Genre genre);
   Future<List<FreeGame>> getGames();
+  Future<List<FreeGame>> mostRecentGames(Genre genre);
   Future<List<FreeGame>> getGamesByGenre(Genre genre);
   Future<List<FreeGame>> getGamesForPlatform(String platform);
   Future<List<FreeGame>> getGamesSortedByRule(SortRule sortRule);
@@ -79,17 +79,21 @@ class FreeGamesService implements Service {
     switch (response.statusCode) {
       case 200:
         final json = jsonDecode(response.body);
-        var result = List.from(json).map((element) => FreeGame.fromJson(element)).toList();
+        var result = List.from(json).map((element) =>
+            FreeGame.fromJson(element)).toList();
         final numberOfPages = (result.length / _maxNumberPerPage).truncate();
 
-        final isSameRequest = currentRequest == _lastRequest;
-
-        if (numberOfPages > 1 && isSameRequest) {
+        if (_lastRequest == null) {
+          result = numberOfPages > 1 ? result.sublist(0, _maxNumberPerPage) : result;
+        } else if (numberOfPages > 1 && _lastRequest == currentRequest) {
           result = result.sublist(_indexOfLastItem, _maxNumberPerPage + _indexOfLastItem);
+          _indexOfLastItem = result.indexOf(result.last);
         } else {
           _indexOfLastItem = 0;
-          _lastRequest = currentRequest;
+          result = numberOfPages > 1 ? result.sublist(0, _maxNumberPerPage) : result;
         }
+
+        _lastRequest = currentRequest;
 
         return result;
       case 404:
