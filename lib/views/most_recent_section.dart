@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:free_games/models/bloc/free_games_bloc.dart';
-import 'package:free_games/reusable/card_view.dart';
-import 'package:free_games/reusable/card_view_representable.dart';
+import 'package:free_games/reusable/card/card_view.dart';
+import 'package:free_games/reusable/card/card_view_representable.dart';
 import 'bloc_buildable_section.dart';
 
 class MostRecentSection extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:free_games/reusable/cell_view_representable.dart';
 
 import 'package:free_games/reusable/free_label.dart';
 import 'package:free_games/styles/default_text_style.dart';

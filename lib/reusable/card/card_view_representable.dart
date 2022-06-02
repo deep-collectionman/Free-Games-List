@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:free_games/models/free_game.dart';
-import 'package:free_games/screens/detail_screen_representable.dart';
-import 'package:free_games/screens/detail_screen.dart';
+import 'package:free_games/screens/detail/detail_screen_representable.dart';
+import 'package:free_games/screens/detail/detail_screen.dart';
 
 abstract class CardViewRepresentable {
   String get title;

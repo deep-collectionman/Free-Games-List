@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:free_games/models/bloc/free_games_bloc.dart';
-import 'package:free_games/reusable/cell_view.dart';
-import 'package:free_games/reusable/cell_view_representable.dart';
+import 'package:free_games/reusable/cell/cell_view.dart';
+import 'package:free_games/reusable/cell/cell_view_representable.dart';
 import 'package:free_games/views/bloc_buildable_section.dart';
 
 class GameListSection extends StatelessWidget {
