@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:free_games/reusable/cell_view_representable.dart';
 
 import 'package:free_games/reusable/free_label.dart';
 import 'package:free_games/styles/default_text_style.dart';
+import 'cell_view_representable.dart';
 
 class CellView extends StatelessWidget {
-  final String thumbnailUrl;
-  final String title;
-  final String subDetail;
-  final IconData iconData;
+  final CellViewRepresentable model;
 
   const CellView({
     super.key,
-    required this.thumbnailUrl,
-    required this.title,
-    required this.subDetail,
-    required this.iconData,
+    required this.model,
   });
 
   @override
@@ -44,7 +40,7 @@ class CellView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4.0),
                 child: FadeInImage.assetNetwork(
                   placeholder: 'assets/images/placeholder.jpg',
-                  image: thumbnailUrl,
+                  image: model.thumbnailUrl,
                   width: 150.0,
                   height: 100.0,
                   fit: BoxFit.cover,
@@ -59,7 +55,7 @@ class CellView extends StatelessWidget {
                 SizedBox(
                   width: 210,
                   child: Text(
-                    title,
+                    model.title,
                     overflow: TextOverflow.fade,
                     maxLines: 1,
                     softWrap: false,
@@ -75,7 +71,7 @@ class CellView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      iconData,
+                      model.iconData,
                       color: const Color(0xFF7A8288),
                     ),
                     const SizedBox(width: 12.0,),
@@ -92,7 +88,7 @@ class CellView extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      subDetail,
+                      model.subDetail,
                       style: defaultTextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,

@@ -2,19 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:free_games/reusable/free_label.dart';
 import 'package:free_games/styles/default_text_style.dart';
+import 'card_view_representable.dart';
 
 class CardView extends StatelessWidget {
-  final String title;
-  final String thumbnailUrl;
-  final Widget detailWidget;
-  final IconData iconData;
+  final CardViewRepresentable model;
 
   const CardView({
     super.key,
-    required this.title,
-    required this.thumbnailUrl,
-    required this.detailWidget,
-    required this.iconData,
+    required this.model,
   });
 
   @override
@@ -22,7 +17,7 @@ class CardView extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => detailWidget),
+        MaterialPageRoute(builder: (_) => model.detailScreenModel),
       ),
       child: SizedBox(
         width: 300,
@@ -35,7 +30,7 @@ class CardView extends StatelessWidget {
               ),
               child: FadeInImage.assetNetwork(
                 placeholder: 'assets/images/placeholder.jpg',
-                image: thumbnailUrl,
+                image: model.thumbnailUrl,
                 width: 300.0,
                 height: 175.0,
                 fit: BoxFit.cover,
@@ -61,7 +56,7 @@ class CardView extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        title,
+                        model.title,
                         overflow: TextOverflow.fade,
                         maxLines: 1,
                         softWrap: false,
@@ -75,7 +70,7 @@ class CardView extends StatelessWidget {
                     Row(
                       children: [
                         Icon(
-                          iconData,
+                          model.iconData,
                           color: const Color(0xFF7A8288),
                         ),
                         const SizedBox(width: 8.0,),
